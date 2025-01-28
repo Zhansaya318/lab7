@@ -1,5 +1,3 @@
-# Dictionary of movies
-
 movies = [
 {
 "name": "Usual Suspects", 
