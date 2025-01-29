@@ -143,5 +143,3 @@ while g != n:
         print("\nYour guess is too low.\nTake a guess.")
     g = int(input())
 print(f"Good job, KBTU! You guessed my number in {n} guesses!")
-
-#14
