@@ -17,15 +17,24 @@ pg.display.set_caption("Music!")
 imgs = [
     pg.transform.scale(pg.image.load("musics/NotLikeUs.jpeg"), (W, H)),
     pg.transform.scale(pg.image.load("musics/UntitledUnmastered.jpg"), (W, H)),
-    pg.transform.scale(pg.image.load("musics/DAMN.jpg"), (W, H))
+    pg.transform.scale(pg.image.load("musics/DAMN.jpg"), (W, H)),
+    pg.transform.scale(pg.image.load("musics/tpab.jpg"), (W, H))
+]
+
+musics = [
+    "musics/notlikeus.mp3",
+    "musics/untitled05.mp3",
+    "musics/pride.mp3",
+    "musics/wesleyTheory.mp3"
 ]
 
 playdm = 0
 isplaying = False
+lenz = len(musics)
 
 def play_music():
     global isplaying
-    pg.mixer.music.load(f"musics/{str(playdm)}.mp3")
+    pg.mixer.music.load(musics[playdm])
     pg.mixer.music.play()
     pg.mixer.music.set_volume(0.1)
     isplaying = True
@@ -38,7 +47,7 @@ def stopIt():
 
 def playnext():
     global playdm
-    playdm = (playdm + 1) % 3
+    playdm = (playdm + 1) % lenz
     play_music()
 
 def playprev():
@@ -46,7 +55,7 @@ def playprev():
     if playdm - 1 < 0:
         playdm = 2
     else:
-        playdm = (playdm - 1) % 3
+        playdm = (playdm - 1) % lenz
     
     play_music()
 
