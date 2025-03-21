@@ -4,8 +4,7 @@ from sys import exit
 
 pg.init()
 
-W = 800
-H = 600
+W, H = 800, 600
 
 clock = pg.time.Clock()
 screen = pg.display.set_mode((W, H))
@@ -14,12 +13,10 @@ bg = pg.image.load("img/clock.png")
 min_hand = pg.image.load("img/min_hand.png")
 sec_hand = pg.image.load("img/sec_hand.png")
 
-def rotate(surf, img, times):
-    rot_img = pg.transform.rotate(img, -(times % 60) * 6)
-    new_img = rot_img.get_rect(center = img.get_rect(center = (400, 300)).center)
-    print(new_img)
-    surf.blit(rot_img, new_img)
-
+def rotate(surf, img, angle, pos):
+    rotated_img = pg.transform.rotate(img, -angle)
+    new_rect = rotated_img.get_rect(center=pos) 
+    surf.blit(rotated_img, new_rect.topleft)
 
 pg.display.set_caption("Clock!")
 
@@ -30,21 +27,15 @@ while True:
             exit()
     
     curtime = dt.datetime.now()
-    minuts = curtime.minute
+    minutes = curtime.minute
     seconds = curtime.second
 
     screen.fill("BLACK")
+    screen.blit(bg, (0, 0))  
 
 
-    screen.blit(bg, (0,0))
-    
-    rotate(screen, sec_hand, seconds)
-    rotate(screen, min_hand, minuts)
-
-    # print(bg.get_rect(center = (400, 300)).center)
-
-    
-    
+    rotate(screen, sec_hand, seconds * 6, (400, 300))  
+    rotate(screen, min_hand, minutes * 6, (400, 300))  
 
     pg.display.update()
     clock.tick(60)
